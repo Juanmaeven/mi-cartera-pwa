@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0d1713">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Tu cartera de inversión, con el aspecto de tu TickrMeter y un LED que cambia según el resultado diario.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="icon" href="./icons/favicon.png" type="image/png">
+  <link rel="stylesheet" href="./style.css?v=23">
+  <style>
+  /* Mi Cartera 2.3: ajustes visibles en móviles y sin depender de la caché CSS */
+  @media (max-width: 700px) {
+    .container { padding: 14px 6px 16px !important; }
+    .topbar { margin-bottom: 12px !important; }
+    .hero { padding: 16px 5px 14px !important; border-radius: 20px !important; }
+    .device-shadow { max-width: none !important; width: 100% !important; }
+    .device { aspect-ratio: 2.55 / 1 !important; padding: 6px 5px !important; }
+    .device-side { flex: 0 0 7% !important; }
+    .device-led { flex: 0 0 10% !important; padding: 3px 4px !important; }
+    .screen-header { height: 17% !important; font-size: clamp(7px, 2vw, 11px) !important; }
+    .screen-number { font-size: clamp(35px, 11vw, 64px) !important; }
+    .screen-footer { height: 37% !important; }
+    .screen-footer > div { gap: 3px !important; }
+    .screen-footer span { font-size: clamp(7px, 2.05vw, 10px) !important; }
+    .screen-footer strong { font-size: clamp(18px, 5.7vw, 28px) !important; }
+    .undertext { margin-top: 15px !important; }
+    .details { margin-top: 12px !important; padding: 14px !important; gap: 10px !important; }
+    .description { margin: 5px 0 !important; }
+    .controls .btn { padding: 11px 9px !important; }
+    footer { margin-top: 12px !important; }
+  }
+  @media (max-width: 365px) {
+    .screen-footer strong { font-size: clamp(17px, 5vw, 22px) !important; }
+  }
+  </style>
+  <script src="./app.js" defer></script>
+  <title>Mi cartera · TickrMeter</title>
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div class="identity">
+        <div class="symbol" aria-hidden="true"><i></i><i></i></div>
+        <div>
+          <div class="overline">PANEL PERSONAL</div>
+          <h1>Mi cartera <span>2.3</span></h1>
+        </div>
+      </div>
+      <div id="status" class="status"><span class="status-circle"></span><span id="statusText">Protegida</span></div>
+    </header>
+
+    <section class="hero" aria-label="Indicador de cartera al estilo TickrMeter">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="device-shadow">
+        <div class="device" id="device" data-led="off">
+          <div class="device-side"><div class="side-notch"></div></div>
+          <div class="screen">
+            <div class="screen-header"><span>MI CARTERA</span><span id="screenTime">—</span></div>
+            <div class="screen-number" id="totalValue">— <small>€</small></div>
+            <div class="screen-footer">
+              <div><span>CAMBIO DIARIO</span><strong id="percentValue">— %</strong></div>
+              <div><span>GANANCIA DIARIA</span><strong id="gainValue">— €</strong></div>
+            </div>
+          </div>
+          <div class="device-led" id="led" aria-label="LED apagado"><div class="led-inner"></div></div>
+        </div>
+      </div>
+      <div class="undertext"><span></span> TU TICKRMETER, EN CUALQUIER LUGAR <span></span></div>
+    </section>
+
+    <section class="details">
+      <div>
+        <div class="details-title"><span class="square"></span><h2>Estado de la cartera</h2></div>
+        <p class="description" id="description" role="status">Introduce tu clave para ver las cotizaciones.</p>
+        <p class="updated" id="updated">Sin datos desbloqueados.</p>
+      </div>
+      <div class="controls">
+        <button type="button" id="refresh" class="btn primary" disabled>↻ <span>Consultar</span></button>
+        <button type="button" id="lock" class="btn neutral" disabled>Bloquear</button>
+      </div>
+    </section>
+    <footer><span>🔒 Cifrado · Tu clave no sale de este dispositivo</span><span>Las cotizaciones pueden ir con retraso</span></footer>
+  </main>
+
+  <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <div class="gate-card">
+      <div class="gate-mark" aria-hidden="true">▦</div>
+      <p class="overline">ACCESO PERSONAL</p>
+      <h2 id="gateTitle">Tu cartera, a un toque.</h2>
+      <p id="gateSubtitle">El panel está protegido. Introduce la frase secreta que configurarás en GitHub para ver los datos reales.</p>
+      <form id="unlockForm">
+        <label for="passphrase">Frase secreta de visualización</label>
+        <input id="passphrase" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Tu frase secreta" required minlength="20">
+        <p class="error" id="gateError" aria-live="polite"></p>
+        <button type="submit" id="unlockBtn" class="btn primary wide">Desbloquear</button>
+      </form>
+      <button type="button" id="demoBtn" class="demo-link">Ver el diseño con cifras ficticias</button>
+      <p class="privacy-note">La web es pública, pero las cifras se publican cifradas. La contraseña se utiliza solo en tu navegador y no se guarda.</p>
+    </div>
+  </div>
+</body>
+</html>
