@@ -11,7 +11,7 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <link rel="icon" href="./icons/favicon.png" type="image/png">
-  <link rel="stylesheet" href="./style.css?v=23">
+  <link rel="stylesheet" href="./style.css?v=24">
   <style>
   /* Mi Cartera 2.3: ajustes visibles en móviles y sin depender de la caché CSS */
   @media (max-width: 700px) {
@@ -38,7 +38,7 @@
     .screen-footer strong { font-size: clamp(17px, 5vw, 22px) !important; }
   }
   </style>
-  <script src="./app.js" defer></script>
+  <script src="./app.js?v=24" defer></script>
   <title>Mi cartera · TickrMeter</title>
 </head>
 <body>
@@ -48,7 +48,7 @@
         <div class="symbol" aria-hidden="true"><i></i><i></i></div>
         <div>
           <div class="overline">PANEL PERSONAL</div>
-          <h1>Mi cartera <span>2.3</span></h1>
+          <h1>Mi cartera <span>2.4</span></h1>
         </div>
       </div>
       <div id="status" class="status"><span class="status-circle"></span><span id="statusText">Protegida</span></div>
@@ -83,6 +83,10 @@
         <button type="button" id="refresh" class="btn primary" disabled>↻ <span>Consultar</span></button>
         <button type="button" id="lock" class="btn neutral" disabled>Bloquear</button>
       </div>
+    </section>
+    <section class="manual-update" aria-label="Actualización manual de la cartera">
+      <button type="button" id="triggerUpdate" class="btn trigger-btn" disabled>⚡ Actualizar ahora</button>
+      <p id="triggerMessage" class="trigger-message" role="status" aria-live="polite">Desbloquea la cartera para solicitar una actualización.</p>
     </section>
     <footer><span>🔒 Cifrado · Tu clave no sale de este dispositivo</span><span>Las cotizaciones pueden ir con retraso</span></footer>
   </main>
