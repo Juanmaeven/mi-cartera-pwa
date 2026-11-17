@@ -62,3 +62,11 @@
   .screen-footer span { font-size: clamp(7px, 2.1vw, 9px); }
   .screen-footer strong { font-size: clamp(19px, 6vw, 25px); }
 }
+
+/* Mi Cartera 2.4: activación manual, sin compartir fila con los controles originales. */
+.manual-update{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.trigger-btn{width:100%;min-height:49px;background:linear-gradient(115deg,#145137,#1b6843);border-color:#145137;color:#fff;box-shadow:0 5px 12px #184e3020}
+.trigger-message{min-height:18px;margin:0 4px;font-size:12px;line-height:1.45;color:var(--muted);text-align:center}
+.trigger-message[data-state="ok"]{color:#166b41}
+.trigger-message[data-state="error"]{color:#ad3541}
+@media(max-width:700px){.manual-update{margin-top:10px}.trigger-btn{min-height:47px;padding:11px}.trigger-message{font-size:11px}}
